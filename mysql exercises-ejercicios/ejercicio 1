@@ -1,0 +1,32 @@
+SET SQL_SAFE_UPDATES = 0;
+create database libreria;
+create table libros(
+titulo char(20), autor char(30), editorial char(15), precio float);
+show tables; 
+insert into libros (titulo, autor, editorial, precio) values ('El aleph','Borges','Planeta',15.00);
+insert into libros (titulo, autor, editorial, precio) values ('Martin Fierro','Jose Hernandez','Emece',25.50);
+insert into libros (titulo, autor, editorial, precio) values ('Aprenda PHP','Mario Molina','Emece',26.80);
+insert into libros (titulo, autor, editorial, precio) values ('Cervantes y el quijote','Borges','Paidos',45.50);
+insert into libros (titulo, autor, editorial, precio) values ('Matematica estas ahi', 'Paenza', 'Paidos',50.00);
+
+select * from libros;
+delete from libros where autor='Paenza';
+select autor from libros;
+delete from libros where autor='Paenza';
+select autor from libros;
+
+select precio from libros;
+delete from libros where precio < 20;
+select precio from libros;
+
+select precio from libros;
+delete from libros where precio >= 40;
+select precio from libros;
+
+select * from libros;
+delete from libros;
+select * from libros;
+
+drop table if exists libros;
+drop database if exists libreria;
+
