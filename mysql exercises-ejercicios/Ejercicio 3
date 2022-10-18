@@ -1,0 +1,50 @@
+create database ejemplo4;
+show databases;
+use ejemplo4;
+
+create table usuarios;
+show tables;
+
+create table usuarios1(nombres varchar(30), clave varchar(6), 
+identificacion integer(11), primary key (identificacion));
+show tables;
+
+describe usuarios1;
+
+insert into usuarios1(nombres, clave,
+identificacion) values ('Mauricio',
+'Pola50', 7690036);
+insert into usuarios1(nombres, clave,
+identificacion) values ('Gerardo',
+'Pola51', 7690037);
+insert into usuarios1(nombres, clave,
+identificacion) values ('Carlos', 'Pola52',
+7690040);
+insert into usuarios1(nombres, clave,
+identificacion) values ('Rocio', 'Pola53',
+7690015);
+insert into usuarios1(nombres, clave,
+identificacion) values ('Norma',
+'Pola54', 7690008);
+select * from usuarios1;
+
+insert into
+usuarios1(nombres, clave,
+identificacion) values
+('William', 'Pola56',
+7690036);
+
+//7690036	Error Code: 1062. Duplicate entry 7690036 for key PRIMARY	0.016 sec
+
+select nombres,clave, identificacion from usuarios1 order
+by clave;
+
+select * from usuarios1;
+
+
+select nombres,clave, identificacion from usuarios1 order by nombres
+asc, clave desc;
+
+select * from usuarios1;
+
+select count(*) from usuarios1;
