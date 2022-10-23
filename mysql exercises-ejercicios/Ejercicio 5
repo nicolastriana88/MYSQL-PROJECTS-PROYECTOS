@@ -1,0 +1,49 @@
+/* crear bases de datos */
+
+drop database colegios;
+create database colegios;
+use colegios;
+
+/* crear tablas */
+
+Create table Alumnos(Id char(8) primary key, Nombre varchar(20) not null, Apellido varchar(20) not null, Direccion
+varchar(50),Fecha_nacimiento char(8));Create table Asignatura(Id char(8) primary key, Nombre varchar(20) not null);
+
+Create table Profesor(Id char(8) primary key, Nombre varchar(20) not null,Apellido varchar(20) not null,Direccion varchar(50),
+Fecha_nacimiento char(8), Nivel_Academico varchar (20));
+
+Create table Inscripcion(Id char(8) primary key, IdAsignatura char(8) not null, IdAlumno char(8) not null,IdProfesor char(8) not null, Fecha
+char(8),CONSTRAINT fk_Asignatura FOREIGN KEY (IdAsignatura) REFERENCES Asignatura (Id),CONSTRAINT fk_Alumno FOREIGN KEY
+(IdAlumno) REFERENCES Alumnos (Id),CONSTRAINT fk_Profesor FOREIGN KEY (IdProfesor) REFERENCES Profesor (Id));
+
+/* verificar registros */
+
+show tables;
+describe Alumnos;
+describe Asignatura;
+describe Profesor;
+
+/* se agrega tabla */
+
+create table Areas_Clases(Id_Area char(8), Nombre_Area varchar(20), Profesor varchar(40) not null, Asignatura varchar(20) not null,
+Cod_Aula int, Fecha_Inic date, Descripcion text(50));
+
+Show tables;
+
+/* se añaden mas llaves primarias y foraneas */
+
+alter table Areas_Clases add primary key (Id_Area);
+alter table Areas_Clases drop primary key;
+
+alter table areas_Clases add foreign key (Asignatura) references Alumnos(id);
+describe areas_clases;
+
+/* borrar llaves foraneas */
+
+ALTER TABLE `colegios`.`areas_clases` DROP FOREIGN KEY `areas_clases_ibfk_1`;
+ALTER TABLE `colegios`.`areas_clases` DROP INDEX `asignatura`; 
+
+/* ó */
+
+alter table areas_clases add constraint fk_alumnos_area_clases foreign key(area_clases_asignatura) references
+Alumnos(alumnos_id);
