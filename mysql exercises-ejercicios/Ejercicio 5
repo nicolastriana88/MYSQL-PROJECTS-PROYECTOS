@@ -1,0 +1,55 @@
+ /*creacion de base de datos */
+
+drop database if exists companianico;
+create database companianico;
+use companianico;
+
+/* creacion tabla */
+
+drop table if exists empleados;
+create table empleados(
+nombre varchar(30),documento char(8) not null,sexo char(1),sueldobasico float,hijos char(2),primary key(documento));
+
+/* insertar registros */
+
+insert into empleados (nombre,documento,sexo,sueldobasico,hijos)
+values ('Juan Perez','22333444','m',910000,1);
+insert into empleados (nombre,documento,sexo,sueldobasico,hijos)
+values ('Ana Acosta','21333444','f',1200000,2);
+insert into empleados (nombre,documento,sexo,sueldobasico,hijos)
+values ('Alberto Lopez','24333444','m',254865050,2);
+insert into empleados (nombre,documento,sexo,sueldobasico,hijos)
+values ('Carlos Sanchez','30333444','m',54503590,3);
+insert into empleados (nombre,documento,sexo,sueldobasico,hijos)
+values ('Mariana Torres','23444555','f',197085040,1);
+insert into empleados (nombre,documento,sexo,sueldobasico,hijos)
+values ('Marcos Garcia','23664555','m',170060080,4);
+
+/* verficacion registros */
+
+show tables;
+select * from empleados;
+
+/* La empresa está pensando en aumentar un 10% el sueldo a los
+empleados, y quiere saber a cuánto
+subiría cada sueldo básico, para ello usamos la siguiente sentencia en la
+cual incluimos una
+columna que hará el cálculo de cada sueldo más el 10% */
+
+select nombre, sueldobasico,sueldobasico+sueldobasico*1/10
+from empleados;
+
+/* La empresa paga un salario familiar por hijos a cargo, $200 por cada hijo.
+Necesitamos el nombre
+del empleado, el sueldo básico, la cantidad de hijos a cargo, el total del
+salario familiar y el
+suedo final (incluyendo el salario familiar) */
+
+select nombre, sueldobasico,hijos,(200*hijos),sueldobasico+(200*hijos)
+from empleados;
+
+/* A todos empleados femeninos al final del año a parte del sueldo básico
+recibirán una bonificación de 500000 luego deseamos saber cual será el
+pago del sueldo básico mas la bonificación. */
+
+select nombre,sueldobasico,sueldobasico+(50000) from empleados where sexo='f'; 
