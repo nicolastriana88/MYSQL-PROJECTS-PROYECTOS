@@ -1,0 +1,58 @@
+/* crear base de datos */
+
+drop database if exists papeleria;
+create database papeleria; 
+use papeleria;
+
+/* crear tabla */
+
+create table articulos(codigo int unsigned auto_increment,
+ nombre varchar(30),
+ precio decimal(5,2),
+ cantidad smallint unsigned, primary key (codigo));
+
+/* insertar registros */
+
+insert into articulos (nombre,precio,cantidad)
+values ('lapices coloresx6',1.4,100);
+insert into articulos (nombre,precio,cantidad)
+values ('lapices coloresx12',2.5,100);
+insert into articulos (nombre,precio,cantidad)
+values ('lapices coloresx24',4.7,100);
+insert into articulos (nombre,precio,cantidad)
+values ('goma tinta',0.2,150);
+insert into articulos (nombre,precio,cantidad)
+values ('birome',1.2,200);
+insert into articulos (nombre,precio,cantidad)
+values ('escuadra',3.2,200);
+insert into articulos (nombre,precio,cantidad)
+values ('compás plástico',5,200);
+insert into articulos (nombre,precio,cantidad)
+values ('compás metal',8.4,250);
+
+/* El precio representa el costo del artículo al comprarlo. Este tipo de
+negocios vende sus artículos por mayor y por menor, para la venta minorista
+incrementa el precio de costo en un 10%, para la venta mayorista lo incrementa en un 5%.
+Muestre los precios de cada artículo y calcule en 2 columnas
+diferentes el precio de cada uno de ellos al venderse por mayor y por
+menor. */
+
+select nombre,precio,precio+precio*0.1,precio+precio*0.05
+from articulos;
+
+/*El gerente de dicho comercio necesita saber cuánto dinero hay invertido
+en cada artículo, para ello, necesitamos multiplicar el precio de cada artículo por la cantidad */
+
+select nombre,precio,cantidad,precio*cantidad
+from articulos;
+
+
+/* Calcular el Iva del 19% al precio de cada cantidad de los artículos */
+select nombre,precio,cantidad,precio*cantidad*0.19
+from articulos;
+
+
+ /* Calcula un 20% del costo de todos los productos adicional para ser
+enviados fuera de Bogotá  */
+select nombre,precio,cantidad,precio*0.20
+from articulos;
