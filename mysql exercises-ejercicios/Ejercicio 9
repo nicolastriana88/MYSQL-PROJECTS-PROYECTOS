@@ -1,0 +1,90 @@
+create database colegioss;
+use colegioss;
+
+create table alumnos(
+  documento char(8) not null,
+  nombre varchar(30),
+  primary key(documento)
+ );
+ 
+ 
+ create table notas(
+  documento char(8) not null,
+  nota decimal(4,2) unsigned
+ );
+ 
+ insert into alumnos values('22333444','Juan Perez');
+ insert into alumnos values('23555666','Marina Herrero');
+ insert into alumnos values('24000333','Daniel Juarez');
+ insert into alumnos values('25222111','Hector Paz');
+ insert into notas values('22333444',7);
+ insert into notas values('23555666',8);
+ insert into notas values('24000333',3);
+ insert into notas values('25222111',7);
+ insert into notas values('22333444',7);
+ insert into notas values('23555666',9);
+ insert into notas values('24000333',4);
+ insert into notas values('22333444',6);
+ insert into notas values('23555666',10);
+ insert into notas values('24000333',3);
+ insert into notas values('25222111',9);
+ insert into notas values('23555666',10);
+ 
+ /* Muestre el documento del alumno, su nombre y el promedio; si el alumno tiene un promedio menor a 
+4, muestre un mensaje "reprobado", si el promedio es mayor o igual a 4 y menor a 7, 
+muestre "regular", si el promedio es mayor a 7, muestre "promocionado", usando "case" */
+ 
+  select a.documento,a.nombre,avg(nota),
+  case when avg(nota)<4 then 'reprobado'
+       when avg(nota)>=4 and avg(nota)<7 then 'regular'
+   else 'promocionado' end as condicion
+ from alumnos as a
+ join notas as n
+ on a.documento=n.documento
+ group by n.documento;
+ 
+ /* Muestre el documento y nombre del alumno y con un "if" si el alumno está aprobado o no */
+ 
+ 
+  select a.documento,a.nombre,
+  if (avg(nota)>=4,'si','no') as aprobado
+ from alumnos as a
+ join notas as n
+ on a.documento=n.documento
+ group by n.documento;
+ 
+ 
+ /* Muestre el documento, nombre del alumno y con un "case", si tiene 1 nota, 2 notas o más de 2 */
+ 
+ select a.documento,a.nombre,
+  case count(*)
+   when 1 then '1 nota'
+   when 2 then '2 notas'
+   else 'mas de 2' end as 'cantidad de notas'
+ from alumnos as a
+ join notas as n
+ on a.documento=n.documento
+ group by n.documento 
+ order by 'cantidad de notas';
+ 
+ /* dele mencion de honor a un estudiante que saca =10 */
+ 
+ select a.documento,a.nombre,
+ if (avg(nota)=10, 'si','no') as menciondehonor
+ from alumnos as a
+ join notas as n
+ on a.documento=n.documento
+ group by n.documento;
+
+/* recuperaciones */
+
+ select a.documento,a.nombre,avg(nota),
+  case when avg(nota)<5 then 'sin recuperacion'
+       when avg(nota)>=5 and avg(nota)<7 then 'recuperacion'
+   else 'en blanco' end as recuperaciones
+ from alumnos as a
+ join notas as n
+ on a.documento=n.documento
+ group by n.documento;
+ 
+ 
